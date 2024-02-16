@@ -21,6 +21,18 @@ app.post("/", (req, res) => {
     );
 });
 
+app.get("/getDay", (req, res) => {
+  let { date } = req.query;
+  const formated = moment(date, "DDMMYYYY", true);
+  if (!formated.isValid()) res.send("Invalid Date Format");
+  else
+    res.send(
+      `The day on date ${formated.format("DD-MM-YYYY")} : ${formated.format(
+        "dddd"
+      )}`
+    );
+});
+
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });
